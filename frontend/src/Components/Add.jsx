@@ -2,25 +2,37 @@ import axios from 'axios';
 import React,{useEffect, useState} from 'react'
 
 const Add = () => {
-  const [csrftoken, setCsrfToken] = useState('');
   useEffect(()=>{
-    console.log('useeffect console',getCookie('csrftoken'))
-  },[csrftoken])
-  function getCookie(name) {
-    let cookieValue = '';
-    if (document.cookie && document.cookie !== '') {
-      console.log(document.cookie)
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
+    axios.get("http://127.0.0.1:8000/added").then(res=>{var html_snippet=res.data
+      var start_index = html_snippet.indexOf('value="') + 'value="'.length;
+      var end_index = html_snippet.indexOf('"', start_index);
+      
+      // Extract the value part
+      var value_part = html_snippet.substring(start_index, end_index);
+      
+      // Split the value
+      var value_split = value_part.split(" ");
+      console.log(value_split);}).catch(err=>{console.log(err)})
+  },[])
+  const getCSRFToken = () => {
+    const cookies = document.cookie;
+  
+    if (cookies) {
+      const csrfCookie = cookies
+        .split('; ')
+        .find(cookie => cookie.startsWith('csrftoken='));
+  
+      if (csrfCookie) {
+        return csrfCookie.split('=')[1];
       }
     }
-    return cookieValue;
+  
+    // Return null or any other value to indicate that the CSRF token is not available
+    console.log(cookies+ " Here should be csrf token")
+    return null;
   }
+  
+  const csrfToken = getCSRFToken();
   
 const [data,setData]=useState({
   name:"",
@@ -32,16 +44,16 @@ const [data,setData]=useState({
     const handleSubmit= async (e)=>{
       e.preventDefault();
       const formData = data
-      const token = getCookie('csrftoken');
-      setCsrfToken(token);
-      console.log("CSRF Token SUbmit:", token)
+   
+      
+      console.log("CSRF Token SUbmit:", csrfToken)
       console.log(formData)
-      console.log(csrftoken)
+      console.log(csrfToken)
       
         axios.post("http://127.0.0.1:8000/",formData,{ headers:
           {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
+            'X-CSRFToken': csrfToken
           }
         },).then((res)=>console.log(res)).catch(e=>{console.log(e)})
     }

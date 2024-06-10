@@ -31,7 +31,7 @@ def StudentAdd(req):
         student.save()
         return render(req, 'student_success.html')
     else:
-        return render(req, 'student_add.html')
+       return render(req, 'student_add.html',{"form":StudentForm})
 def StudentUpdater(req):
     if req.method == 'POST':
         name = req.POST.get('name')
