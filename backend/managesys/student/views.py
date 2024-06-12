@@ -46,9 +46,6 @@ def StudentUpdater(req):
         return render(req, 'updated.html')
     else:
         return render(req, 'student_update.html')
-def allStudents(req):
-    data = Student.objects.all()
-    return render(req, 'students.html',{"data":data,"del":StudentDelete,"upd":Studentupd})
 
 # Reset Api
 
@@ -58,6 +55,6 @@ class serializeStudents(generics.ListCreateAPIView):
 @api_view(['POST'])
 def StudentDelete(req):
     if req.method == 'POST':
-        id = req.POST.get('id')
+        id = req.data.get('id')
         Student.objects.filter(id=id).delete()
-        return render(req, 'student_deleted.html')
+        return Response({'message': 'Student Deleted Successfully!'})

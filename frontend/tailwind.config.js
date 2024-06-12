@@ -3,7 +3,11 @@ export default {
   content: [   "./index.html",
   "./src/**/*.{js,ts,jsx,tsx}",],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'mont':'Montserrat'
+      }
+    },
   },
   plugins: [require('daisyui'),],
 }
