@@ -4,7 +4,7 @@ import { MdDeleteForever, MdOutlineMode } from "react-icons/md";
 import Alert from "./Alert";
 
 const Home = () => {
-  const [resStatus,setresStatus]=useState('noRes')
+  const [resStatus,setresStatus]=useState(false)
   const [alert,setAlert]=useState({
     type:'',
     message:''
@@ -12,22 +12,27 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [uid, setId] = useState({ id: "" });
   const deleteStd = (e) => {
-    console.log(e.currentTarget.value);
-    const UID = { id: e.currentTarget.value };
-    setId(UID);
-    axios
-      .post("http://127.0.0.1:8000/delete", UID, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        setresStatus('success');
-        console.log(res.data.message)
-        setAlert({type:'alert-success',message:'Student Deleted Successfully'})
-      })
-      .catch((e) => {
-        setresStatus('fail')
-        setAlert({type:'alert-error',message:'Ooopsss!! Sorry An Error Occured'})
-      });
+    const isConfirmed = confirm("Are you sure to proceed?");
+    if (isConfirmed) {
+      const UID = { id: e.currentTarget.value };
+      setId(UID);
+      axios
+        .post("http://127.0.0.1:8000/delete", UID, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          setresStatus(true);
+          console.log(res.data.message)
+          setAlert({type:'alert-success',message:'Student Deleted Successfully'})
+        })
+        .catch((e) => {
+          setresStatus(true)
+          setAlert({type:'alert-error',message:'Ooopsss!! Sorry An Error Occured'})
+        });
+    } else {
+      console.log("User canceled.");
+    }
+   
   };
   const updateStd = (e) => {
     console.log("Update Student Function Not Developed");
@@ -87,4 +92,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home
