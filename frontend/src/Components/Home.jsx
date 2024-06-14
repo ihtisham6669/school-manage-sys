@@ -35,7 +35,9 @@ const Home = () => {
    
   };
   const updateStd = (e) => {
+
     console.log("Update Student Function Not Developed");
+    console.log(e.currentTarget.value);
   };
   useEffect(() => {
     axios
@@ -59,9 +61,9 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((obj) => (
+          {data.map((obj,index) => (
             <tr key={obj.id}>
-              <th>{obj.id}</th>
+              <th>{index+1}</th>
               <td>{obj.name}</td>
               <td>{obj.course}</td>
               <td>{obj.joindate}</td>

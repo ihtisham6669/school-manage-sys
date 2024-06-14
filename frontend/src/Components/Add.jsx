@@ -5,7 +5,6 @@ import { PiStudentBold } from "react-icons/pi";
 import { FaExclamationTriangle } from "react-icons/fa";
 const Add = () => {
   const [resStatus, setresStatus] = useState(false);
-  const [idMatch, setIdMatch] = useState(false);
   const [resData, setResData] = useState([]);
   const [alert, setAlert] = useState({
     type: "",
@@ -13,7 +12,6 @@ const Add = () => {
   });
   const [data, setData] = useState({
     name: "",
-    id: "",
     course: "",
     joindate: "",
     fee: "",
@@ -27,21 +25,6 @@ const Add = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  const idCheck=(e)=>{
-    setData({ ...data, id: e.target.value });
-    var flag=false
-    for (let i = 0; i < resData.length; i++) {
-      if (e.target.value == resData[i].id) {
-        flag=true;
-        break;
-      } else {
-        flag=false
-      }
-    }
-    setIdMatch(flag);
-   
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = data;
@@ -73,18 +56,6 @@ const Add = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center flex-col items-start flex-wrap gap-6 ">
-          <div className="w-full">
-            <label className="text-cyan-500 font-medium text-lg " htmlFor="id">
-              ID <span className={`text-red-500 italic text-xs mx-2 ${idMatch?'opacity-100 ease-out duration-300':'opacity-0 duration-300 ease-in'}`}>Sorry!!!!!!!! Already id is given to a student</span>
-            </label>
-            <input
-              id="id"
-              type="number"
-              placeholder="Enter Unique ID"
-              onChange={idCheck}
-              className={`block ${idMatch?'border-red-500 focus:border-red-700 focus:ring-red-600 ':'border-sky-500 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 '} appearance-none w-full px-4 py-2 mt-2 bg-gray-700 border rounded-md    focus:outline-none focus:ring focus:ring-opacity-100`}
-            />
-          </div>
           <div className="w-full">
             <label
               className="text-cyan-500 font-medium text-lg "
@@ -154,15 +125,10 @@ const Add = () => {
         </div>
 
         <div className="flex justify-center mt-6">
-          <button disabled={idMatch} className={`px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm  rounded-md ${idMatch? ' bg-red-700':'hover:bg-sky-600 bg-sky-700'}`}>
-            {idMatch ?
-             <div className="flex items-center gap-2 ">
-             <FaExclamationTriangle className="text-xl"/>  ID Conflict
-           </div>
-            :
+          <button  className={`px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm  rounded-md hover:bg-sky-600 bg-sky-700`}>
             <div className="flex items-center gap-2 ">
               <PiStudentBold className="text-xl"/>  Add the Student
-            </div>}
+            </div>
           </button>
         </div>
       </form>
