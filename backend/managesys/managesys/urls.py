@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home"),
     path('add',views.AddStudent,name="adder"),
-    path('update',views.UpdateStudent,name="updater"),
+    path('edit',views.editStudent,name="edit"),
     path('delete',views.StudentDelete,name="delete"),
     path('all',views.serializeStudents.as_view(),name="view"),
 ]

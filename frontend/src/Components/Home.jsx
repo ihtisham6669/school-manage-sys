@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdDeleteForever, MdOutlineMode } from "react-icons/md";
 import Alert from "./Alert";
-
+import {Link} from 'react-router-dom'
 const Home = () => {
   const [resStatus,setresStatus]=useState(false)
   const [alert,setAlert]=useState({
@@ -34,11 +34,7 @@ const Home = () => {
     }
    
   };
-  const updateStd = (e) => {
 
-    console.log("Update Student Function Not Developed");
-    console.log(e.currentTarget.value);
-  };
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/all")
@@ -77,14 +73,12 @@ const Home = () => {
                 >
                   <MdDeleteForever />
                 </button>
-                <button
-                  type="submit"
-                  value={obj.id}
-                  onClick={updateStd}
+                <Link
+                  to={`/edit-student/${obj.id}`}
                   className="text-xl text-sky-500 border-2 rounded-full border-sky-600 p-1"
                 >
                   <MdOutlineMode />
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

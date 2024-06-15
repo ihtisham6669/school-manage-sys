@@ -1,6 +1,6 @@
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Add, Home, Navbar } from "./Components"
+import { Add, Edit, Home, Navbar } from "./Components"
 
 const App=()=> {
 
@@ -10,6 +10,7 @@ const App=()=> {
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/add-student" element={<Add />}/>
+      <Route path="/edit-student/:id" element={<Edit />}/>
     </Routes>
     
     

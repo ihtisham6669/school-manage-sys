@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Alert from "./Alert";
 import { PiStudentBold } from "react-icons/pi";
-import { FaExclamationTriangle } from "react-icons/fa";
+
 const Add = () => {
   const [resStatus, setresStatus] = useState(false);
   const [resData, setResData] = useState([]);

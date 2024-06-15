@@ -3,25 +3,15 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <div className="navbar px-6 bg-base-100">
+    <div className="navbar px-6 bg-base-100 shadow-sm shadow-sky-600 mb-4">
     <div className="flex-1">
-      <span className="btn btn-ghost text-xl">Manage Student Sys</span>
+      <a href='/' className="btn btn-ghost text-xl">Manage Student Sys</a>
     </div>
     <div className="flex-none">
-      <ul className="menu menu-horizontal px-1">
+      <ul className="menu menu-horizontal gap-3 px-1">
         <li><Link to={'/'}>ALL Students</Link></li>
-        <li>
-          <details>
-            <summary>
-              Manage
-            </summary>
-            <ul className="p-6 bg-base-100 z-50 rounded-t-none">
-              <li><Link to={'/add-student'}>Add Student</Link></li>
-              <li><a>Delete Student</a></li>
-              <li><a>Update Student</a></li>
-            </ul>
-          </details>
-        </li>
+        <li><Link to={'/add-student'}>Add Student</Link></li>
+        
       </ul>
     </div>
   </div>

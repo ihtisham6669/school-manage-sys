@@ -21,20 +21,22 @@ def AddStudent(request):
         student.save()
         return Response({'message': 'Student added Successfully!'},status=200,template_name='student_success.html')
         # return render(req, 'student_add.html',{"form":StudentForm})
-def UpdateStudent(req):
-   if req.method == 'POST':
-        name = req.POST.get('name')
-        id = req.POST.get('UID')
-        course = req.POST.get('course')
-        joindate = req.POST.get('joindate')
-        fee = req.POST.get('fee')
-        student= Student.objects.get(id=id)
-        student.name=name
-        student.course=course
-        student.joindate=joindate
-        student.fee=fee
-        student.save()
-        return render(req, 'updated.html')
+@api_view(['POST'])
+def editStudent(req):
+   print(req.data)
+#    if req.method == 'POST':
+#         name = req.POST.get('name')
+#         id = req.POST.get('UID')
+#         course = req.POST.get('course')
+#         joindate = req.POST.get('joindate')
+#         fee = req.POST.get('fee')
+#         student= Student.objects.get(id=id)
+#         student.name=name
+#         student.course=course
+#         student.joindate=joindate
+#         student.fee=fee
+#         student.save()
+#         return render(req, 'updated.html')
 
 
 # Reset Api
