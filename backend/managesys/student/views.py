@@ -24,19 +24,18 @@ def AddStudent(request):
 @api_view(['POST'])
 def editStudent(req):
    print(req.data)
-#    if req.method == 'POST':
-#         name = req.POST.get('name')
-#         id = req.POST.get('UID')
-#         course = req.POST.get('course')
-#         joindate = req.POST.get('joindate')
-#         fee = req.POST.get('fee')
-#         student= Student.objects.get(id=id)
-#         student.name=name
-#         student.course=course
-#         student.joindate=joindate
-#         student.fee=fee
-#         student.save()
-#         return render(req, 'updated.html')
+   name = req.data.get('name')
+   id = req.data.get('id')
+   course = req.data.get('course')
+   joindate = req.data.get('joindate')
+   fee = req.data.get('fee')
+   student= Student.objects.get(id=id)
+   student.name=name
+   student.course=course
+   student.joindate=joindate
+   student.fee=fee
+   student.save()
+   return Response({'message': 'Student Updated Successfully!'},status=200,template_name='updated.html')
 
 
 # Reset Api
